@@ -50,14 +50,24 @@ El diseño visual está controlado por:
 ### Director del Panel
 - Acceso rápido a información clave desde el `dashboard`.
 
-### Gestión de Usuarios
-- Visualización de detalles personales en un perfil accesible y organizado.
-
 ### Integración con API
 - Uso de una API para obtener datos dinámicos y presentarlos en tablas interactivas.
 
 ### Navegación Intuitiva
 - **Menú superior**: Para acceder fácilmente a las funciones principales.
+
+## Archivos de `app.component`
+El componente principal de la aplicación (`app.component`) incluye:
+- **`app.component.html`**: Estructura HTML base del componente principal.
+- ![image](https://github.com/user-attachments/assets/633d49a7-2a62-4cc3-b6c1-54777c184ddf)
+
+- **`app.component.css`**: Estilos específicos para personalizar la apariencia de la aplicación.
+  ![image](https://github.com/user-attachments/assets/b0453e83-960f-4b34-9354-9f660a5a7045)
+
+- **`app.component.ts`**: Lógica principal del componente que administra la interacción de la aplicación.
+  ![image](https://github.com/user-attachments/assets/4ac1e248-dd2b-4c80-a003-ce92d0694667)
+
+- **`app.component.spec.ts`**: Pruebas unitarias para garantizar la funcionalidad del componente.
 
 ---
 
