@@ -1,5 +1,6 @@
 # Proyecto Angular: **Sistema de Gestión Empresarial**
 Realizado por: Guzmán Vite Adamaris Vite Adamaris Yareth Guadalupe
+
 ## Introducción
 Este proyecto es una aplicación web desarrollada en Angular, enfocada en optimizar la administración de negocios mediante funcionalidades modernas y herramientas digitales. Integra características como inicio de sesión, visualización de datos en tablas dinámicas provenientes de una API, y visualización de perfil de usuario en una interfaz amigable y eficiente.
 
@@ -55,6 +56,96 @@ El diseño visual está controlado por:
 
 ### Navegación Intuitiva
 - **Menú superior**: Para acceder fácilmente a las funciones principales.
+
+  ### Tablas Dinámicas
+El componente de tablas permite organizar y manejar datos de manera interactiva, con las siguientes funcionalidades clave:
+
+#### Botón de Información
+- **Función**: Al hacer clic en este botón, se muestra un modal o alerta con información detallada del registro seleccionado.
+- **Implementación**:
+  ```typescript
+  verInformacion(id: number): void {
+    const registro = this.registros.find(item => item.id === id);
+    if (registro) {
+      alert(`Información del registro:\nNombre: ${registro.nombre}\nCorreo: ${registro.correo}`);
+    }
+  }
+  ```
+------------------------------------------------------------------------------------------------------
+Botón de edición
+Función : Permite abrir un formulario precargado con la información actual del registro para que el usuario pueda editarlo. Al guardar, los cambios se reflejan en la tabla.
+Implementación :
+
+```typescript
+editarRegistro(id: number): void {
+  const registro = this.registros.find(item => item.id === id);
+  if (registro) {
+    this.formularioEditar = { ...registro }; // Precarga la información en el formulario
+    this.mostrarFormulario = true; // Muestra el formulario
+  }
+}
+
+guardarEdicion(): void {
+  const index = this.registros.findIndex(item => item.id === this.formularioEditar.id);
+  if (index >= 0) {
+    this.registros[index] = { ...this.formularioEditar }; // Actualiza el registro
+    alert('Registro editado con éxito.');
+    this.mostrarFormulario = false;
+  }
+}
+```
+Botón de eliminar
+Función : Permite eliminar un registro seleccionado después de una confirmación para evitar eliminaciones accidentales.
+Implementación :
+
+```typescript
+eliminarRegistro(id: number): void {
+  const confirmar = confirm('¿Estás seguro de que deseas eliminar este registro?');
+  if (confirmar) {
+    this.registros = this.registros.filter(item => item.id !== id);
+    alert('Registro eliminado con éxito.');
+  }
+}
+```
+
+Estructura HTML de la tabla
+El código HTML de la tabla incluye los botones con sus respectivas acciones:
+
+tabla.component.html
+```html
+<td class="text-center">
+  <button
+                  class="btn custom-btn"
+                  [attr.data-bs-toggle]="'modal'"
+                  [attr.data-bs-target]="'#detailsModal'"
+                  (click)="openModal(product)"
+                >
+                  Detalles
+                </button>
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-primary btn-icon"
+                  [attr.data-bs-toggle]="'modal'"
+                  [attr.data-bs-target]="'#editModal'"
+                  (click)="openEditModal(product)"
+                >
+                <mat-icon>edit</mat-icon> <!-- Ícono de lápiz -->
+                </button>
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-danger btn-icon"
+                  [attr.data-bs-toggle]="'modal'"
+                  [attr.data-bs-target]="'#deleteModal'"
+                  (click)="openDeleteModal(product)"
+                >
+                <mat-icon>delete</mat-icon> <!-- Ícono de bote de basura -->
+                </button>
+              </td>
+```
+----------------------------------------
+  
 
 ## Archivos de `app.component`
 El componente principal de la aplicación (`app.component`) incluye:
